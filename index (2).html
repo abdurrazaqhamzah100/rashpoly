@@ -1,0 +1,1777 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rash_Poly — Premium Nylon Company</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --black: #04060f;
+        --white: #f0f8ff;
+        --gold: #e0157a;
+        --gold-light: #ff5ab0;
+        --teal: #006d8f;
+        --teal-bright: #00e5ff;
+        --red: #c0007a;
+        --glass: rgba(0, 229, 255, 0.04);
+      }
+
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      body {
+        background: var(--black);
+        color: var(--white);
+        font-family: "Cormorant Garamond", serif;
+        cursor: none;
+        overflow-x: hidden;
+      }
+
+      /* Custom Cursor */
+      .cursor {
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: var(--teal-bright);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.1s ease,
+          width 0.3s,
+          height 0.3s,
+          background 0.3s;
+        mix-blend-mode: difference;
+      }
+      .cursor-ring {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gold);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.12s ease,
+          width 0.3s,
+          height 0.3s;
+      }
+      body:hover .cursor {
+        opacity: 1;
+      }
+
+      /* NOISE OVERLAY */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9000;
+        opacity: 0.5;
+      }
+
+      /* ===== NAVBAR ===== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(
+          to bottom,
+          rgba(5, 5, 5, 0.95),
+          transparent
+        );
+        backdrop-filter: blur(4px);
+      }
+      .logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 4px;
+        color: var(--gold);
+        text-shadow: 0 0 30px rgba(200, 168, 75, 0.5);
+        animation: logoGlow 3s ease-in-out infinite alternate;
+      }
+      @keyframes logoGlow {
+        from {
+          text-shadow: 0 0 20px rgba(224, 21, 122, 0.4);
+        }
+        to {
+          text-shadow:
+            0 0 50px rgba(224, 21, 122, 0.9),
+            0 0 80px rgba(224, 21, 122, 0.3);
+        }
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: "Space Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--white);
+        text-decoration: none;
+        opacity: 0.7;
+        transition: all 0.3s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 100%;
+        height: 1px;
+        background: var(--teal-bright);
+        transition: right 0.4s ease;
+      }
+      .nav-links a:hover {
+        opacity: 1;
+        color: var(--teal-bright);
+      }
+      .nav-links a:hover::after {
+        right: 0;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      /* Animated BG Grid */
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #04060f 40%, #001a2e 100%);
+      }
+      .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: gridMove 20s linear infinite;
+      }
+      @keyframes gridMove {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(60px);
+        }
+      }
+
+      /* Floating orbs */
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+        animation: orbFloat 8s ease-in-out infinite alternate;
+      }
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: #006d8f;
+        top: -200px;
+        right: -100px;
+        animation-delay: 0s;
+      }
+      .orb-2 {
+        width: 400px;
+        height: 400px;
+        background: #a0005a;
+        bottom: -100px;
+        left: -50px;
+        animation-delay: 3s;
+      }
+      .orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #00bcd4;
+        top: 30%;
+        left: 40%;
+        animation-delay: 5s;
+      }
+      @keyframes orbFloat {
+        from {
+          transform: translate(0, 0) scale(1);
+        }
+        to {
+          transform: translate(30px, -40px) scale(1.1);
+        }
+      }
+
+      /* Nylon ribbon decorations */
+      .ribbon {
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--teal-bright),
+          transparent
+        );
+        opacity: 0.2;
+        animation: ribbonSway 6s ease-in-out infinite alternate;
+      }
+      .ribbon:nth-child(1) {
+        left: 15%;
+        animation-delay: 0s;
+      }
+      .ribbon:nth-child(2) {
+        left: 30%;
+        animation-delay: 1s;
+      }
+      .ribbon:nth-child(3) {
+        left: 70%;
+        animation-delay: 2s;
+      }
+      .ribbon:nth-child(4) {
+        left: 85%;
+        animation-delay: 0.5s;
+      }
+      @keyframes ribbonSway {
+        from {
+          transform: skewX(-2deg);
+          opacity: 0.1;
+        }
+        to {
+          transform: skewX(2deg);
+          opacity: 0.3;
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 5px;
+        color: var(--teal-bright);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        padding: 8px 20px;
+        margin-bottom: 30px;
+        animation:
+          badgePulse 2s ease-in-out infinite alternate,
+          fadeSlideUp 1s ease 0.3s both;
+      }
+      @keyframes badgePulse {
+        from {
+          box-shadow: 0 0 0 rgba(0, 229, 255, 0);
+        }
+        to {
+          box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+      }
+
+      .hero-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(5rem, 15vw, 14rem);
+        line-height: 0.9;
+        letter-spacing: 2px;
+        animation: fadeSlideUp 1s ease 0.5s both;
+        position: relative;
+      }
+      .hero-title span {
+        display: block;
+        background: linear-gradient(135deg, #ff5ab0, #e0157a, #8b0050);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 40px rgba(224, 21, 122, 0.5));
+      }
+      .hero-title .poly {
+        color: var(--white);
+        -webkit-text-fill-color: var(--white);
+        background: none;
+        filter: none;
+      }
+      .hero-title .underscore {
+        color: var(--teal-bright);
+        -webkit-text-fill-color: var(--teal-bright);
+        background: none;
+        filter: none;
+        animation: blinkUnderscore 1.2s step-end infinite;
+      }
+      @keyframes blinkUnderscore {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.6rem);
+        font-weight: 300;
+        font-style: italic;
+        color: rgba(245, 240, 232, 0.7);
+        margin-top: 20px;
+        letter-spacing: 2px;
+        animation: fadeSlideUp 1s ease 0.7s both;
+      }
+
+      .hero-cta {
+        margin-top: 50px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeSlideUp 1s ease 0.9s both;
+      }
+      .btn-primary {
+        font-family: "Space Mono", monospace;
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 18px 45px;
+        background: var(--gold);
+        color: var(--white);
+        border: none;
+        text-decoration: none;
+        cursor: none;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s;
+        font-weight: 700;
+      }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--teal-bright);
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+      .btn-primary:hover::before {
+        transform: translateX(0);
+      }
+      .btn-primary span {
+        position: relative;
+        z-index: 1;
+      }
+      .btn-primary:hover {
+        color: var(--black);
+      }
+
+      .btn-secondary {
+        font-family: "Space Mono", monospace;
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 18px 45px;
+        background: transparent;
+        color: var(--white);
+        border: 1px solid rgba(245, 240, 232, 0.3);
+        text-decoration: none;
+        cursor: none;
+        transition: all 0.4s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--teal-bright);
+        color: var(--teal-bright);
+        box-shadow: 0 0 30px rgba(45, 232, 192, 0.15);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: fadeSlideUp 1s ease 1.2s both;
+      }
+      .scroll-indicator span {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 3px;
+        opacity: 0.4;
+      }
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+        animation: scrollLine 2s ease-in-out infinite;
+      }
+      @keyframes scrollLine {
+        0%,
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scaleY(0.5);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== MARQUEE STRIP ===== */
+      .marquee-strip {
+        background: var(--gold);
+        overflow: hidden;
+        padding: 14px 0;
+        position: relative;
+        z-index: 2;
+      }
+      .marquee-track {
+        display: flex;
+        gap: 0;
+        animation: marqueeScroll 20s linear infinite;
+        white-space: nowrap;
+      }
+      .marquee-track span {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1rem;
+        letter-spacing: 4px;
+        color: var(--black);
+        padding: 0 30px;
+      }
+      .marquee-track .dot {
+        color: var(--teal);
+        font-size: 1.2rem;
+      }
+      @keyframes marqueeScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ===== SECTIONS COMMON ===== */
+      section {
+        padding: 120px 60px;
+        position: relative;
+      }
+      .section-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--teal-bright);
+        margin-bottom: 15px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(3rem, 7vw, 7rem);
+        line-height: 0.95;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease 0.1s;
+      }
+      .section-body {
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.9;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.2s;
+        max-width: 680px;
+        color: rgba(245, 240, 232, 0.8);
+      }
+      .revealed .section-label,
+      .revealed .section-title,
+      .revealed .section-body {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===== ABOUT ===== */
+      .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: center;
+      }
+      .about-visual {
+        position: relative;
+        height: 600px;
+      }
+      .about-box-main {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #006d8f 0%, #001a2e 100%);
+        border: 1px solid rgba(0, 229, 255, 0.2);
+        overflow: hidden;
+      }
+      .about-box-main::before {
+        content: "NYLON";
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 12rem;
+        color: rgba(255, 255, 255, 0.03);
+        position: absolute;
+        bottom: -30px;
+        right: -20px;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .about-box-accent {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: var(--gold);
+        bottom: -30px;
+        left: -30px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        animation: accentPulse 4s ease-in-out infinite alternate;
+      }
+      @keyframes accentPulse {
+        from {
+          transform: rotate(-2deg);
+          box-shadow: 0 0 30px rgba(224, 21, 122, 0.4);
+        }
+        to {
+          transform: rotate(2deg);
+          box-shadow: 0 0 60px rgba(224, 21, 122, 0.7);
+        }
+      }
+      .about-box-accent .big-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 4rem;
+        color: var(--white);
+        line-height: 1;
+      }
+      .about-box-accent p {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        padding: 0 10px;
+      }
+      .about-box-tag {
+        position: absolute;
+        top: 30px;
+        right: -20px;
+        background: var(--black);
+        border: 1px solid var(--gold);
+        padding: 12px 20px;
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        color: var(--gold);
+        z-index: 3;
+      }
+
+      /* Animated nylon threads inside about box */
+      .threads {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .thread {
+        position: absolute;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(45, 232, 192, 0.5),
+          transparent
+        );
+        animation: threadFall 3s linear infinite;
+        opacity: 0;
+      }
+      .thread:nth-child(1) {
+        left: 20%;
+        height: 150px;
+        animation-delay: 0s;
+      }
+      .thread:nth-child(2) {
+        left: 40%;
+        height: 200px;
+        animation-delay: 0.8s;
+      }
+      .thread:nth-child(3) {
+        left: 60%;
+        height: 100px;
+        animation-delay: 1.5s;
+      }
+      .thread:nth-child(4) {
+        left: 80%;
+        height: 180px;
+        animation-delay: 2.2s;
+      }
+      .thread:nth-child(5) {
+        left: 30%;
+        height: 120px;
+        animation-delay: 0.4s;
+      }
+      .thread:nth-child(6) {
+        left: 70%;
+        height: 160px;
+        animation-delay: 1.2s;
+      }
+      @keyframes threadFall {
+        0% {
+          top: -200px;
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          top: 110%;
+          opacity: 0;
+        }
+      }
+
+      /* ===== SERVICES ===== */
+      .services {
+        background: linear-gradient(180deg, var(--black) 0%, #00080f 100%);
+      }
+      .services-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        background: rgba(0, 229, 255, 0.08);
+      }
+      .service-card {
+        background: var(--black);
+        padding: 60px 40px;
+        position: relative;
+        overflow: hidden;
+        cursor: none;
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      .service-card.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .service-card:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .service-card:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .service-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #a0005a 0%, transparent 60%);
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .service-card:hover::before {
+        opacity: 0.15;
+      }
+      .service-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 100%;
+        height: 2px;
+        background: var(--gold);
+        transition: right 0.5s ease;
+      }
+      .service-card:hover::after {
+        right: 0;
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 25px;
+        display: block;
+        filter: drop-shadow(0 0 15px rgba(45, 232, 192, 0.5));
+        animation: iconBob 3s ease-in-out infinite alternate;
+      }
+      @keyframes iconBob {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-6px);
+        }
+      }
+      .service-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 5rem;
+        color: rgba(255, 255, 255, 0.04);
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        line-height: 1;
+      }
+      .service-card h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        color: var(--gold);
+        margin-bottom: 15px;
+      }
+      .service-card p {
+        font-size: 1.05rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: rgba(245, 240, 232, 0.7);
+        position: relative;
+      }
+
+      /* ===== PRODUCTS SHOWCASE ===== */
+      .products {
+        overflow: hidden;
+      }
+      .products-header {
+        margin-bottom: 60px;
+      }
+      .products-track-wrapper {
+        overflow: hidden;
+        margin: 0 -60px;
+      }
+      .products-track {
+        display: flex;
+        gap: 30px;
+        padding: 20px 60px;
+        animation: productsScroll 25s linear infinite;
+      }
+      .products-track:hover {
+        animation-play-state: paused;
+      }
+      @keyframes productsScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .product-card {
+        min-width: 320px;
+        background: var(--glass);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 40px 30px;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+        transition:
+          transform 0.4s,
+          border-color 0.4s;
+      }
+      .product-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--gold);
+      }
+      .product-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+      }
+      .product-emoji {
+        font-size: 3.5rem;
+        display: block;
+        margin-bottom: 20px;
+      }
+      .product-card h4 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        color: var(--white);
+        margin-bottom: 10px;
+      }
+      .product-card p {
+        font-size: 0.95rem;
+        color: rgba(245, 240, 232, 0.6);
+        font-weight: 300;
+        line-height: 1.7;
+      }
+      .product-tag {
+        display: inline-block;
+        margin-top: 20px;
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        padding: 5px 12px;
+        border: 1px solid var(--teal-bright);
+        color: var(--teal-bright);
+      }
+
+      /* ===== STATS ===== */
+      .stats-section {
+        background: linear-gradient(135deg, #001525 0%, var(--black) 100%);
+        padding: 100px 60px;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border: 1px solid rgba(0, 229, 255, 0.15);
+      }
+      .stat-box {
+        padding: 60px 40px;
+        border-right: 1px solid rgba(0, 229, 255, 0.1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.4s;
+      }
+      .stat-box:last-child {
+        border-right: none;
+      }
+      .stat-box::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        height: 2px;
+        background: var(--gold);
+        transition:
+          left 0.5s ease,
+          right 0.5s ease;
+      }
+      .stat-box:hover::after {
+        left: 0;
+        right: 0;
+      }
+      .stat-box:hover {
+        background: rgba(0, 229, 255, 0.04);
+      }
+      .stat-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 5rem;
+        color: var(--gold);
+        line-height: 1;
+        display: block;
+        text-shadow: 0 0 40px rgba(224, 21, 122, 0.4);
+      }
+      .stat-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        color: rgba(245, 240, 232, 0.5);
+        margin-top: 10px;
+        display: block;
+      }
+
+      /* ===== LOCATION ===== */
+      .location-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: center;
+      }
+      .location-visual {
+        position: relative;
+        height: 500px;
+        border: 1px solid rgba(0, 229, 255, 0.15);
+        background: linear-gradient(135deg, #001525, #04060f);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .location-map-bg {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 229, 255, 0.06) 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+      .location-pin {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        animation: pinPulse 2s ease-in-out infinite;
+      }
+      @keyframes pinPulse {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .pin-icon {
+        font-size: 5rem;
+        display: block;
+        filter: drop-shadow(0 0 20px rgba(224, 21, 122, 0.9));
+      }
+      .pin-ring {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: ringExpand 2s ease-out infinite;
+      }
+      .pin-ring:nth-child(2) {
+        animation-delay: 0.7s;
+      }
+      .pin-ring:nth-child(3) {
+        animation-delay: 1.4s;
+      }
+      @keyframes ringExpand {
+        0% {
+          width: 60px;
+          height: 60px;
+          opacity: 1;
+        }
+        100% {
+          width: 250px;
+          height: 250px;
+          opacity: 0;
+        }
+      }
+      .location-address {
+        margin-top: 30px;
+      }
+      .location-address h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 3.5rem;
+        color: var(--gold);
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
+      .address-line {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 15px;
+        font-size: 1.05rem;
+        color: rgba(245, 240, 232, 0.8);
+      }
+      .address-line .icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* ===== CONTACT ===== */
+      .contact-section {
+        background: linear-gradient(135deg, #8b0050 0%, #e0157a 100%);
+        color: var(--white);
+        text-align: center;
+        padding: 120px 60px;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-section::before {
+        content: "RASH_POLY";
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgba(255, 255, 255, 0.06);
+        white-space: nowrap;
+        pointer-events: none;
+        letter-spacing: -10px;
+      }
+      .contact-section .section-label {
+        color: var(--teal-bright);
+      }
+      .contact-section .section-title {
+        color: var(--white);
+      }
+      .contact-section .section-body {
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 auto;
+      }
+      .contact-btn {
+        display: inline-block;
+        margin-top: 50px;
+        font-family: "Space Mono", monospace;
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        padding: 20px 60px;
+        background: var(--black);
+        color: var(--teal-bright);
+        text-decoration: none;
+        cursor: none;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s;
+        font-weight: 700;
+      }
+      .contact-btn:hover {
+        background: var(--teal-bright);
+        color: var(--black);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background: #020408;
+        padding: 60px;
+        border-top: 1px solid rgba(0, 229, 255, 0.1);
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+      }
+      .footer-brand .logo {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 15px;
+      }
+      .footer-brand p {
+        font-size: 0.95rem;
+        color: rgba(245, 240, 232, 0.4);
+        line-height: 1.8;
+        max-width: 300px;
+      }
+      footer h5 {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--teal-bright);
+        margin-bottom: 20px;
+      }
+      footer ul {
+        list-style: none;
+      }
+      footer ul li {
+        margin-bottom: 12px;
+        font-size: 0.95rem;
+        color: rgba(245, 240, 232, 0.5);
+        transition: color 0.3s;
+      }
+      footer ul li:hover {
+        color: var(--gold);
+      }
+      .footer-bottom {
+        background: #020408;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-bottom p {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        color: rgba(245, 240, 232, 0.25);
+      }
+
+      /* ===== PAGE LOADER ===== */
+      .loader {
+        position: fixed;
+        inset: 0;
+        background: var(--black);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s;
+      }
+      .loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-text {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 3rem;
+        letter-spacing: 10px;
+        color: var(--gold);
+        animation: loaderPulse 1s ease-in-out infinite alternate;
+      }
+      @keyframes loaderPulse {
+        from {
+          opacity: 0.4;
+          letter-spacing: 8px;
+          color: #e0157a;
+        }
+        to {
+          opacity: 1;
+          letter-spacing: 14px;
+          color: #00e5ff;
+        }
+      }
+      .loader-bar {
+        width: 200px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .loader-bar::after {
+        content: "";
+        position: absolute;
+        left: -100%;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #00e5ff,
+          #e0157a,
+          transparent
+        );
+        animation: loaderBar 1.5s ease-in-out infinite;
+      }
+      @keyframes loaderBar {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1024px) {
+        nav {
+          padding: 20px 30px;
+        }
+        section {
+          padding: 80px 30px;
+        }
+        .about {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+        .about-visual {
+          height: 400px;
+        }
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .location-section {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+        footer {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+      @media (max-width: 640px) {
+        .nav-links {
+          display: none;
+        }
+        .hero-title {
+          font-size: 5rem;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-section {
+          padding: 80px 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+      <div class="loader-text">RASH_POLY</div>
+      <div class="loader-bar"></div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="logo">
+        RASH<span style="color: var(--teal-bright)">_</span>POLY
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg">
+        <div class="grid-lines"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="ribbon"></div>
+        <div class="ribbon"></div>
+        <div class="ribbon"></div>
+        <div class="ribbon"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">★ OGUN STATE'S PREMIER NYLON COMPANY ★</div>
+        <div class="hero-title">
+          <span>RASH</span>
+          <span class="poly">_POLY<span class="underscore">_</span></span>
+        </div>
+        <p class="hero-subtitle">
+          Where Quality Nylon Meets Excellence — Selling & Buying
+        </p>
+        <div class="hero-cta">
+          <a href="#services" class="btn-primary"
+            ><span>Explore Services</span></a
+          >
+          <a href="#contact" class="btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-strip">
+      <div class="marquee-track" id="marqueeTrack">
+        <span>QUALITY NYLONS</span><span class="dot">✦</span>
+        <span>BUYING & SELLING</span><span class="dot">✦</span>
+        <span>OGUN STATE</span><span class="dot">✦</span> <span>RASH_POLY</span
+        ><span class="dot">✦</span> <span>PREMIUM PACKAGING</span
+        ><span class="dot">✦</span> <span>WHOLESALE NYLON</span
+        ><span class="dot">✦</span> <span>RETAIL SUPPLY</span
+        ><span class="dot">✦</span> <span>TRUSTED BRAND</span
+        ><span class="dot">✦</span>
+        <!-- duplicate for infinite loop -->
+        <span>QUALITY NYLONS</span><span class="dot">✦</span>
+        <span>BUYING & SELLING</span><span class="dot">✦</span>
+        <span>OGUN STATE</span><span class="dot">✦</span> <span>RASH_POLY</span
+        ><span class="dot">✦</span> <span>PREMIUM PACKAGING</span
+        ><span class="dot">✦</span> <span>WHOLESALE NYLON</span
+        ><span class="dot">✦</span> <span>RETAIL SUPPLY</span
+        ><span class="dot">✦</span> <span>TRUSTED BRAND</span
+        ><span class="dot">✦</span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-visual">
+        <div class="about-box-main">
+          <div class="threads">
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+          </div>
+        </div>
+        <div class="about-box-accent">
+          <span class="big-num">10+</span>
+          <p>YEARS OF EXCELLENCE</p>
+        </div>
+        <div class="about-box-tag">EST. IN OTTA</div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">THE NYLON<br />SPECIALISTS</h2>
+        <p class="section-body">
+          Rash_Poly is Ogun State's leading nylon company, proudly located at
+          Orita Money, Ilogbo Oju-Ore, Otta. We specialize in the buying and
+          selling of premium-quality nylon products — from industrial packaging
+          to everyday consumer bags.
+          <br /><br />
+          Built on trust, quality, and community, we supply businesses, markets,
+          factories, and individuals with nylons that meet the highest
+          standards. Whether you're purchasing in bulk wholesale or selling raw
+          nylon materials, Rash_Poly is your most reliable partner.
+        </p>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="services-header">
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title" style="max-width: 700px; margin: 0 auto 20px">
+          OUR CORE<br />SERVICES
+        </h2>
+        <p class="section-body" style="margin: 0 auto; text-align: center">
+          From wholesale to retail, buying to supply — we cover every angle of
+          the nylon trade.
+        </p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-num">01</span>
+          <span class="service-icon">🛍️</span>
+          <h3>Nylon Selling</h3>
+          <p>
+            We offer a wide range of nylon bags, packaging materials, and
+            industrial films. Available in all sizes, thicknesses, and
+            quantities — from small retail to large-scale wholesale orders.
+          </p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">02</span>
+          <span class="service-icon">🔄</span>
+          <h3>Nylon Buying</h3>
+          <p>
+            We purchase raw, scrap, and used nylon materials at the best market
+            rates. Bring your nylon materials to us — we offer fair pricing and
+            prompt payment for all grades and types.
+          </p>
+        </div>
+        <div class="service-card">
+          <span class="service-num">03</span>
+          <span class="service-icon">🚚</span>
+          <h3>Bulk Supply</h3>
+          <p>
+            We supply nylon products in bulk to businesses, markets, factories
+            and institutions across Ogun State and beyond. Large-volume orders
+            welcome with competitive pricing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SHOWCASE -->
+    <section class="products" id="products">
+      <div class="products-header">
+        <p class="section-label">Our Range</p>
+        <h2 class="section-title">NYLON<br />PRODUCTS</h2>
+      </div>
+      <div class="products-track-wrapper">
+        <div class="products-track">
+          <!-- Set 1 -->
+          <div class="product-card">
+            <span class="product-emoji">🛍️</span>
+            <h4>Shopping Bags</h4>
+            <p>
+              High-quality nylon shopping bags in various sizes, colors, and
+              thicknesses for market and retail use.
+            </p>
+            <span class="product-tag">RETAIL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">📦</span>
+            <h4>Packaging Film</h4>
+            <p>
+              Industrial-grade nylon packaging films for food, manufacturing,
+              and industrial wrapping applications.
+            </p>
+            <span class="product-tag">INDUSTRIAL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🗑️</span>
+            <h4>Waste Nylon Bags</h4>
+            <p>
+              Heavy-duty nylon waste bags for domestic and industrial waste
+              management solutions.
+            </p>
+            <span class="product-tag">HOUSEHOLD</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🧴</span>
+            <h4>Stretch Wrap</h4>
+            <p>
+              Strong nylon stretch wrap film ideal for securing pallets,
+              bundles, and large commercial goods.
+            </p>
+            <span class="product-tag">COMMERCIAL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🥡</span>
+            <h4>Food Wrap Nylon</h4>
+            <p>
+              Food-safe nylon wrap for fresh produce, meats, and bakery products
+              in restaurant and market use.
+            </p>
+            <span class="product-tag">FOOD GRADE</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🏭</span>
+            <h4>Raw Nylon Resin</h4>
+            <p>
+              We buy and sell raw nylon pellets and granules for manufacturers
+              and recyclers at competitive prices.
+            </p>
+            <span class="product-tag">RAW MATERIAL</span>
+          </div>
+          <!-- Set 2 (duplicate for infinite scroll) -->
+          <div class="product-card">
+            <span class="product-emoji">🛍️</span>
+            <h4>Shopping Bags</h4>
+            <p>
+              High-quality nylon shopping bags in various sizes, colors, and
+              thicknesses for market and retail use.
+            </p>
+            <span class="product-tag">RETAIL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">📦</span>
+            <h4>Packaging Film</h4>
+            <p>
+              Industrial-grade nylon packaging films for food, manufacturing,
+              and industrial wrapping applications.
+            </p>
+            <span class="product-tag">INDUSTRIAL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🗑️</span>
+            <h4>Waste Nylon Bags</h4>
+            <p>
+              Heavy-duty nylon waste bags for domestic and industrial waste
+              management solutions.
+            </p>
+            <span class="product-tag">HOUSEHOLD</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🧴</span>
+            <h4>Stretch Wrap</h4>
+            <p>
+              Strong nylon stretch wrap film ideal for securing pallets,
+              bundles, and large commercial goods.
+            </p>
+            <span class="product-tag">COMMERCIAL</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🥡</span>
+            <h4>Food Wrap Nylon</h4>
+            <p>
+              Food-safe nylon wrap for fresh produce, meats, and bakery products
+              in restaurant and market use.
+            </p>
+            <span class="product-tag">FOOD GRADE</span>
+          </div>
+          <div class="product-card">
+            <span class="product-emoji">🏭</span>
+            <h4>Raw Nylon Resin</h4>
+            <p>
+              We buy and sell raw nylon pellets and granules for manufacturers
+              and recyclers at competitive prices.
+            </p>
+            <span class="product-tag">RAW MATERIAL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Happy Customers</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">50T</span>
+          <span class="stat-label">Nylon Traded Monthly</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Years in Business</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Quality Assured</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCATION -->
+    <section class="location-section" id="location">
+      <div class="location-text">
+        <p class="section-label">Find Us</p>
+        <h2 class="section-title">OUR<br />LOCATION</h2>
+        <div class="location-address">
+          <h3>RASH_POLY HQ</h3>
+          <div class="address-line">
+            <span class="icon">📍</span>
+            <span>Orita Money, Ilogbo Oju-Ore, Otta, Ogun State, Nigeria</span>
+          </div>
+          <div class="address-line">
+            <span class="icon">🕐</span>
+            <span>Mon – Sat: 7:00 AM – 7:00 PM</span>
+          </div>
+          <div class="address-line">
+            <span class="icon">📞</span>
+            <span>Call us for bulk orders & pricing enquiries</span>
+          </div>
+          <div class="address-line">
+            <span class="icon">🚗</span>
+            <span
+              >Easily accessible from Otta main road — look for the green
+              Rash_Poly signboard</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="location-visual">
+        <div class="location-map-bg"></div>
+        <div class="location-pin">
+          <div class="pin-ring"></div>
+          <div class="pin-ring"></div>
+          <div class="pin-ring"></div>
+          <span class="pin-icon">📍</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+      <p class="section-label" style="opacity: 1; transform: none">
+        Get In Touch
+      </p>
+      <h2 class="section-title" style="opacity: 1; transform: none">
+        LET'S DO<br />BUSINESS
+      </h2>
+      <p class="section-body" style="opacity: 1; transform: none">
+        Whether you want to buy nylon products in bulk, sell your nylon
+        materials, or just find out more about what Rash_Poly offers — we'd love
+        to hear from you. Visit us at our Otta location today.
+      </p>
+      <a href="tel:+234 814 654 6446" class="contact-btn">VISIT US TODAY</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        <span class="logo"
+          >RASH<span style="color: var(--teal-bright)">_</span>POLY</span
+        >
+        <p>
+          Ogun State's trusted nylon company. Buying and selling premium quality
+          nylon products since day one.
+        </p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li>About Us</li>
+          <li>Services</li>
+          <li>Products</li>
+          <li>Location</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Address</h5>
+        <ul>
+          <li>Orita Money</li>
+          <li>Ilogbo Oju-Ore</li>
+          <li>Otta, Ogun State</li>
+          <li>Nigeria</li>
+        </ul>
+      </div>
+    </footer>
+    <div class="footer-bottom">
+      <p>© 2025 RASH_POLY. ALL RIGHTS RESERVED.</p>
+      <p>OGUN STATE'S NYLON SPECIALISTS</p>
+    </div>
+
+    <script>
+      // LOADER
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("loader").classList.add("hidden");
+        }, 2000);
+      });
+
+      // CURSOR
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
+      });
+      function animateRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          cursor.style.width = "20px";
+          cursor.style.height = "20px";
+          ring.style.width = "70px";
+          ring.style.height = "70px";
+        });
+        el.addEventListener("mouseleave", () => {
+          cursor.style.width = "12px";
+          cursor.style.height = "12px";
+          ring.style.width = "40px";
+          ring.style.height = "40px";
+        });
+      });
+
+      // SCROLL REVEAL
+      const reveals = document.querySelectorAll(
+        ".section-label, .section-title, .section-body, .service-card, .about-visual, .about-text, .location-text, .location-visual",
+      );
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              if (
+                e.target.classList.contains("service-card") ||
+                e.target.classList.contains("about-visual") ||
+                e.target.classList.contains("about-text") ||
+                e.target.classList.contains("location-text") ||
+                e.target.classList.contains("location-visual")
+              ) {
+                e.target.classList.add("revealed");
+              } else {
+                e.target.parentElement.classList.add("revealed");
+              }
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      // Service cards animate in
+      const scObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("revealed");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".service-card")
+        .forEach((el) => scObserver.observe(el));
+
+      // PARALLAX on hero orbs
+      document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 30;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+        document.querySelectorAll(".orb").forEach((orb, i) => {
+          const factor = (i + 1) * 0.4;
+          orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+        });
+      });
+
+      // COUNTING STATS ANIMATION
+      const statNums = document.querySelectorAll(".stat-num");
+      const statObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !e.target.dataset.counted) {
+              e.target.dataset.counted = true;
+              const text = e.target.textContent;
+              const num = parseFloat(text);
+              if (!isNaN(num)) {
+                let start = 0;
+                const end = num;
+                const suffix = text.replace(/[\d.]/g, "");
+                const duration = 2000;
+                const step = (end / duration) * 16;
+                const timer = setInterval(() => {
+                  start += step;
+                  if (start >= end) {
+                    start = end;
+                    clearInterval(timer);
+                  }
+                  e.target.textContent =
+                    (Number.isInteger(end)
+                      ? Math.floor(start)
+                      : start.toFixed(1)) + suffix;
+                }, 16);
+              }
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      statNums.forEach((n) => statObserver.observe(n));
+    </script>
+  </body>
+</html>
